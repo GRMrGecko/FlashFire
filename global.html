@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<script>
+safari.application.addEventListener("message", handleMessage, false);
+
+function handleMessage(theEvent) {
+	if (theEvent.name=="canLoad") {
+		var message = theEvent.message;
+		console.log(message);
+		if (message.name=="getSettings") {
+			console.log("Get Settings");
+			var data = message.data;
+			theEvent.message = safari.extension.settings.bob;
+		}
+	}
+}
+safari.application.addEventListener("message", handleMessage, false);
+</script>

@@ -1,0 +1,100 @@
+.flashfireBlocked {
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.15)), to(rgba(0, 0, 0, 0.15))) !important;
+	border:1px solid rgba(0, 0, 0, 0.5) !important;
+	display: table !important;
+	-webkit-user-select: none !important;
+	font-family:"Lucida Grande", "Helvetica Neue", Helvetica, sans-serif !important;
+}
+
+.flashfireBlocked:active {
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0, 0, 0, 0.15)), to(rgba(255, 255, 255, 0.15))) !important;
+}
+
+.flashfireBlocked .container {
+	position: relative !important;
+	width: inherit !important;
+	height: inherit !important;
+	margin: 0px !important;
+}
+
+.flashfireBlocked .vText {
+	display: table-cell !important; 
+	vertical-align: middle !important;
+	width: inherit !important;
+	height: inherit !important;
+}
+.flashfireBlocked .hText {
+	float: left !important;
+	position: relative !important;
+	left: 50% !important;
+	height: auto !important;
+	width: auto;
+}
+.flashfireBlocked .textContainer {
+	float: left !important;
+	position: relative !important;
+	left: -50% !important;
+	width: auto !important;
+	height: auto !important;
+}
+.flashfireBlocked .textContainer.rotate {
+	left: -90% !important;
+	-webkit-transform: rotate(-90deg);
+}
+.flashfireBlocked .textContainer .text {
+	border-radius: 4.0px !important;
+	border: 3px solid rgba(0, 0, 0, 0.3) !important;
+	font-size: 20px !important;
+	width: auto !important;
+	color: rgba(0, 0, 0, 0.3) !important;
+	font-weight: bold !important;
+	padding: 14px 5px 7px 5px !important;
+	-webkit-user-select: none !important;
+	cursor: default !important;
+	background: none !important;
+	position: relative !important;
+	height: auto !important;
+	line-height: 0 !important;
+}
+.flashfireBlocked  .textContainer.mini .text {
+	border-radius: 4.0px !important;
+	font-size: 8px !important;
+	border: 1px solid rgba(0, 0, 0, 0.3) !important;
+	padding: 6px 3px 4px 3px !important;
+}
+.flashfireBlocked  .textContainer .textInset {
+	border: 0px !important;
+	font-size: 20px !important;
+	width: auto !important;
+	color: rgba(255, 255, 255, 0.45) !important;
+	font-weight: bold !important;
+	padding: 16px 7px 10px 8px !important;
+	-webkit-user-select: none !important;
+	cursor: default !important;
+	background: none !important;
+	height: auto !important;
+	line-height: 0 !important;
+	position: absolute !important;
+	top: 1px !important;
+	right: 1px !important;
+}
+.flashfireBlocked  .textContainer.mini .textInset {
+	font-size: 8px !important;
+	padding: 6px 3px 10px 8px !important;
+}
+
+.flashfireBlocked .action {
+	position: absolute !important;
+	left: 10px !important;
+	top: 10px !important;
+	width: 14px !important;
+	height: 14px !important;
+	background: url("action.png") no-repeat !important;
+	opacity: 0.25 !important;
+	-webkit-transition-property: opacity;
+	-webkit-transition-duration: 0.5s;
+	z-index: 2 !important;
+}
+.flashfireBlocked .action:hover {
+	opacity: 0.5 !important;
+}
