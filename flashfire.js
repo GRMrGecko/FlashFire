@@ -26,10 +26,10 @@ function handleBeforeLoadEvent(event) {
 			}
 		}
 		
-		//console.log(safari.self.tab.canLoad(event, {name: "getSettings", data: ""}));
+		if (safari.self.tab.canLoad(event, {name: "getSetting", setting: "invisible"})==true && element.style.display=="none")
+			return;
 		
 		event.preventDefault();
-		
 		blockElement(element);
 	}
 }
@@ -83,7 +83,6 @@ function displayContextMenu(event) {
 	var element = event.target;
 	var left = event.pageX;
 	var top = event.pageY;
-	console.log(event);
 	while (element.className!="flashfireBlocked")
 		element = element.parentNode;
 	
@@ -123,6 +122,23 @@ function displayContextMenu(event) {
 	autoLoadElement.className = "flashfireMenuItem";
 	autoLoadElement.innerHTML = "Automatically Load Flash on &quot;" + window.location.host + "&quot;";
 	menuElement.appendChild(autoLoadElement);
+	
+	var autoHideElement = document.createElement("li");
+	autoHideElement.className = "flashfireMenuItem";
+	autoHideElement.innerHTML = "Automatically Hide Flash on &quot;" + window.location.host + "&quot;";
+	menuElement.appendChild(autoHideElement);
+	
+	var prefSeparatorElement = document.createElement("li");
+	prefSeparatorElement.className = "flashfireMenuSeparator";
+	menuElement.appendChild(prefSeparatorElement);
+	
+	var preferencesElement = document.createElement("li");
+	preferencesElement.className = "flashfireMenuItem";
+	preferencesElement.innerHTML = "FlashFire Preferences...";
+	var prefWidth = 445;
+	var prefHeigth = 500;
+	preferencesElement.onclick = function() {window.open(safari.extension.baseURI + "preferences.html", "FlashFire Preferences", "width=" + prefWidth + ",height=" + prefHeigth + ",left=" + (screen.availWidth-prefWidth)/2 + ",top=" + (screen.availHeight-prefHeigth)/2 + ",resizable=no,scrollbars=no,menubar=no,status=no,location=no")}
+	menuElement.appendChild(preferencesElement);
 	
 	document.body.appendChild(menuElement);
 	

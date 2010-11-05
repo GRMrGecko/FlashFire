@@ -2,15 +2,25 @@
 <script>
 safari.application.addEventListener("message", handleMessage, false);
 
+var FFWhitelist = safari.extension.settings["whitelist"].split(",");
+var FFBlacklist = safari.extension.settings["blacklist"].split(",");
+
 function handleMessage(theEvent) {
 	if (theEvent.name=="canLoad") {
 		var message = theEvent.message;
 		console.log(message);
-		if (message.name=="getSettings") {
-			console.log("Get Settings");
-			var data = message.data;
-			theEvent.message = safari.extension.settings.bob;
+		if (message.name=="getSetting") {
+			console.log("Get Setting");
+			theEvent.message = safari.extension.settings[message.setting];
+		} else 	if (message.name=="getSetting") {
+			console.log("Set Setting");
+			safari.extension.settings[message.setting] = message.data;
 		}
+	} else if (theEvent.name=="getPreferences") {
+		var preferences = {invisible: safari.extension.settings["invisible"], whitelist: FFWhitelist, blacklist: FFBlacklist}
+		safari.application.activeBrowserWindow.activeTab.page.dispatchMessage("preferences", preferences);
+	} else if (theEvent.name=="setInvisible") {
+		safari.extension.settings["invisible"] = theEvent.message;
 	}
 }
 safari.application.addEventListener("message", handleMessage, false);

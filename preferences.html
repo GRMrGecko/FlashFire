@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>FlashFire Preferences</title>
+	<script type="text/javascript">
+	var FFWhitelist = null;
+	function handleMessage(theEvent) {
+		if (theEvent.name=="preferences") {
+			console.log(theEvent.message);
+			document.getElementById("invisible").checked = theEvent.message.invisible;
+			FFWhitelist = theEvent.message.whitelist;
+			var whitelist = document.getElementById("whitelist");
+			for (i=0; i<FFWhitelist.length; i++) {
+				var item = document.createElement("option");
+				item.value = FFWhitelist[i];
+				item.innerHTML = FFWhitelist[i];
+				whitelist.appendChild(item);
+			}
+			document.getElementById("loading").style.display = "none";
+			document.getElementById("settings").style.display = "block";
+		}
+	}
+	
+	function setInvisible() {
+		safari.self.tab.dispatchMessage("setInvisible", document.getElementById("invisible").checked);
+	}
+	
+	function whitelistSelect() {
+		document.getElementById("whitelistRemoveButton").disabled = true;
+		var options = document.getElementById("whitelist").options;
+		for (i=0; i<options.length; i++) {
+			if (options[i].selected==true) {
+				document.getElementById("whitelistRemoveButton").disabled = false;
+				break;
+			}
+		}
+	}
+	function whitelistRemove() {
+		var options = document.getElementById("whitelist").options;
+		for (i=0; i<options.length; i++) {
+			if (options[i].selected==true) {
+				console.log("Removing");
+				document.getElementById("whitelist").removeChild(options[i]);
+				document.getElementById("whitelistRemoveButton").disabled = true;
+				break;
+			}
+		}
+	}
+	function whitelistAdd() {
+		var site = document.getElementById("whitelistField").value;
+		if (site=="")
+			return;
+		var found = false;
+		for (i=0; i<FFWhitelist.length; i++) {
+			if (FFWhitelist[i]==site)
+				found = true;
+		}
+		if (!found) {
+			var item = document.createElement("option");
+			item.value = site;
+			item.innerHTML = site;
+			whitelist.appendChild(item);
+		}
+		document.getElementById("whitelistField").value = "";
+		return false;
+	}
+	
+	safari.self.tab.dispatchMessage("getPreferences");
+	safari.self.addEventListener("message", handleMessage, false);
+	</script>
+	<link rel="stylesheet" href="preferences.css" type="text/css" media="screen" />
+</head>
+<body>
+	<div id="settings" style="display: none">
+	<label for="invisible"><input type="checkbox" id="invisible" name="invisible" value="true" onclick="setInvisible();"> Load invisible flash automatically</label><br />
+	<br /><div class="flashfireTitle">Whitelist</div>
+	<select name="whitelist" id="whitelist" size="10" style="width: 400px" onchange="whitelistSelect()"></select><br />
+	<form onsubmit="return whitelistAdd();"><input type="text" id="whitelistField" size="54"><input type="submit" value="Add"><input type="button" id="whitelistRemoveButton" value="Remove" onclick="whitelistRemove()" disabled></form>
+	</div>
+	<div id="loading" style="text-align: center">Loading Preferences...</div>
+</body>
+</html>

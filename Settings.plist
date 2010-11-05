@@ -4,9 +4,29 @@
 <array>
 	<dict>
 		<key>DefaultValue</key>
-		<string></string>
+		<false/>
+		<key>Key</key>
+		<string>invisible</string>
+		<key>Title</key>
+		<string>Load invisible flash automatically</string>
+		<key>Type</key>
+		<string>CheckBox</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>vimeo.com,mrgeckosmedia.net</string>
 		<key>Key</key>
 		<string>whitelist</string>
+		<key>Title</key>
+		<string>White list</string>
+		<key>Type</key>
+		<string>Hidden</string>
+	</dict>
+	<dict>
+		<key>Key</key>
+		<string>blacklist</string>
+		<key>Type</key>
+		<string>Hidden</string>
 	</dict>
 </array>
 </plist>
